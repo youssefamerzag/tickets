@@ -53,13 +53,23 @@ class AdminController extends Controller
 
     public function users_index() {
         return view('admin.users', [
-            'users' => User::where('role' , null)->get()->sortByDesc('created_at')
+            'users' => User::where('role' , 'editor')
+                ->orWhere('role', 'user')
+                ->get()->sortByDesc('created_at')
         ]);
     }
 
     public function destroy_user($id) {
         $user = User::find($id);
         $user -> delete();
+        return to_route('users.index');
+    }
+
+    public function update_user(Request $request , $id) {
+        $user = User::find($id);
+        $user->role = $request->input('user-role');
+        $user-> save();
+
         return to_route('users.index');
     }
 

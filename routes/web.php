@@ -46,6 +46,7 @@ Route::middleware('admin')->group(function () {
     Route::delete('/admin/ticket/destroy/{ticket}', [AdminController::class , 'destroy'])->name('adminticket.destroy');
     Route::get('/admin/users', [AdminController::class , 'users_index'])->name('users.index');
     Route::delete('/admin/user/{user}', [AdminController::class , 'destroy_user'])->name('user.destroy');
+    Route::put('/admin/user/{user}', [AdminController::class , 'update_user'])->name('user.update');
 });
 
 

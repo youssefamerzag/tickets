@@ -22,11 +22,11 @@
                                 <p class="mb-1">Type: {{ $Openticket->type }}</p>
                                 <p class="mb-1">by: {{ $Openticket->user->name }}</p>
                             </div>
-                            @if(Auth::guest() || Auth::user()->role != 'admin')
+                            @if(Auth::guest() || Auth::user()->role == 'user' )
                                 <a></a>
                             @endif
                             @if(Auth::check())
-                                @if(Auth::user()->role === 'admin')
+                                @if(Auth::user()->role === 'admin' || 'editor')
                                     <div>
                                         <a href="{{ route('adminticket.edit', $Openticket->id) }}" class="btn btn-sm btn-outline-primary px-3 m-1">Edit</a>
                                         <form  action="{{ route('adminticket.destroy' , $Openticket)}}" method="post">
