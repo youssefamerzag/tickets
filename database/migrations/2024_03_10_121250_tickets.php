@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('type');
             $table->string('status')->default('Open');
             $table->foreignId('user_id');
+            $table->file('file');
             $table->timestamps();
         });
     }
