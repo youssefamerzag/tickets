@@ -16,7 +16,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->role != 'admin'){
+        if(Auth::user()->role == 'user'){
             return redirect('profile');
         }
     return $next($request);

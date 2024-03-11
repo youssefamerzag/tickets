@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <div class="card">
         <div class="card-header">
-            <h2 class="text-center">{{ $user->name }}</h2>
+            <h2 class="text-center mb-0 p-1">{{ $user->role }}: {{ $user->name }}</h2>
         </div>
         <div class="card-body">
             <h5 class="card-title">Email:</h5>
