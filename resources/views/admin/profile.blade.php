@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <div class="card">
         <div class="card-header">
-            <h2 class="text-center">Admin: {{ $user->name }}</h2>
+            <h2 class="text-center mb-0 p-1">Admin: {{ $user->name }}</h2>
         </div>
         <div class="card-body">
             <h5 class="card-title">Email:</h5>
@@ -17,8 +17,8 @@
     </div>
 
     <div class="card mt-4">
-        <div class="card-header">
-            <h5 class="card-title">Tickets</h5>
+        <div class="card-header bg-primary">
+            <h5 class="card-title text-white mb-0 p-1">Tickets</h5>
         </div>
         <ul class="list-group list-group-flush">
             @forelse($tickets as $ticket)
@@ -36,7 +36,8 @@
                             <p class="mb-1">by: {{ $ticket->user->name }}</p>
                         </div>
                         <div>
-                            <a href="{{ route('adminticket.edit', $ticket->id) }}" class="btn btn-sm btn-outline-primary  px-3 m-1">Edit</a>
+                            <a href="{{ route('tickets.show', $ticket->id) }}" class="btn btn-sm btn-outline-primary px-3 m-1">show</a>
+                            <a href="{{ route('adminticket.edit', $ticket->id) }}" class="btn btn-sm btn-outline-success  px-3 m-1">Edit</a>
                             <form  action="{{ route('adminticket.destroy' , $ticket)}}" method="post">
                                 @csrf
                                 @method('delete')

@@ -17,8 +17,8 @@
     </div>
 
     <div class="card mt-4">
-        <div class="card-header">
-            <h5 class="card-title">Tickets</h5>
+        <div class="card-header bg-primary">
+            <h5 class="card-title text-white mb-0 p-1">Tickets</h5>
         </div>
         <ul class="list-group list-group-flush">
             @forelse($tickets as $ticket)
@@ -35,12 +35,13 @@
                             <p class="mb-1">Type: {{ $ticket->type }}</p>
                         </div>
                         <div>
-                        <a href="{{ route('tickets.edit', $ticket->id) }}" class="btn btn-sm btn-outline-primary px-3 m-1">Edit</a>
-                        <form action="{{ route('tickets.destroy', $ticket->id)}}" method="post">
-                            @csrf
-                            @method('delete')
-                            <input class="btn btn-sm btn-outline-danger px-2 m-1" type="submit" value="Delete">
-                        </form>
+                            <a href="{{ route('tickets.show', $ticket->id) }}" class="btn btn-sm btn-outline-primary px-3 m-1">show</a>    
+                            <a href="{{ route('tickets.edit', $ticket->id) }}" class="btn btn-sm btn-outline-success px-3 m-1">Edit</a>
+                            <form action="{{ route('tickets.destroy', $ticket->id)}}" method="post">
+                                @csrf
+                                @method('delete')
+                                <input class="btn btn-sm btn-outline-danger px-2 m-1" type="submit" value="Delete">
+                            </form>
                         </div>
                     </div>
                 </li>

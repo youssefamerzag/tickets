@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="card mt-4">
-        <div class="card-header bg-success">
+        <div class="card-header bg-primary">
             <h5 class="card-title text-white mb-0 p-1">Tickets</h5>
         </div>
         <ul class="list-group list-group-flush">
@@ -26,10 +26,10 @@
                                 <a></a>
                             @endif
                             @if(Auth::check())
-                                @if(Auth::user()->role === 'admin' || 'editor')
+                                @if(Auth::user()->role !== 'user')
                                     <div>
                                         <a href="{{ route('adminticket.edit', $Openticket->id) }}" class="btn btn-sm btn-outline-success px-3 m-1">Edit</a>
-                                        <a href="{{ route('ticket.show', $Openticket->id) }}" class="btn btn-sm btn-outline-primary px-3 m-1">Show</a>
+                                        <a href="{{ route('tickets.show', $Openticket->id) }}" class="btn btn-sm btn-outline-primary px-3 m-1">Show</a>
                                         <form  action="{{ route('adminticket.destroy' , $Openticket)}}" method="post">
                                             @csrf
                                             @method('delete')
@@ -75,10 +75,10 @@
                                     <a></a>
                                 @endif
                                 @if(Auth::check())
-                                    @if(Auth::user()->role === 'admin' || 'editor')
+                                    @if(Auth::user()->role !== 'user')
                                         <div>
                                             <a href="{{ route('adminticket.edit', $Closedticket->id) }}" class="btn btn-sm btn-outline-success px-3 m-1">Edit</a>
-                                            <a href="{{ route('ticket.show', $Closedticket->id) }}" class="btn btn-sm btn-outline-primary px-3 m-1">show</a>
+                                            <a href="{{ route('tickets.show', $Closedticket->id) }}" class="btn btn-sm btn-outline-primary px-3 m-1">show</a>
                                             <form  action="{{ route('adminticket.destroy' , $Closedticket)}}" method="post">
                                                 @csrf
                                                 @method('delete')

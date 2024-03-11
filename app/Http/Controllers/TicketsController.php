@@ -11,8 +11,8 @@ class TicketsController extends Controller
 {
     public function index() {
         return view('home', [
-            'Opentickets' => Tickets::where('status' , 'Open')->get(),
-            'Closedtickets' => Tickets::where('status' , 'Closed')->get( )
+            'Opentickets' => Tickets::where('status' , 'Open')->get()->sortByDesc('created_at'),
+            'Closedtickets' => Tickets::where('status' , 'Closed')->get()->sortByDesc('created_at')
         ]);
     }
 

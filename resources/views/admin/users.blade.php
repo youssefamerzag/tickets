@@ -3,49 +3,41 @@
 @section('content')
 
 <div class="container">
-    <h1 class="mt-5 mb-4">Users List</h1>
+    <h1 class="mt-2 mb-4 text-center">Users List</h1>
 
-    <div class="row">
-        <div class="">
-            <div class="shadow-sm">
-                <div class="list-group row">
-                    @foreach ($users as $user)
-                    <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                        <div>
-                            <h4 class="mb-1">{{ $user->name }}</h4>
-                            <h6 class="mb-1">{{ $user->role }}</h6>
-                            <small>{{ $user->created_at->format('M d, Y') }}</small>
-                            <p class="mb-1">{{ $user->email }}</p>
-                        </div>
-                        <div class="ml-auto">
-                            <div>
-                                <form action="{{ route('user.destroy', $user) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <input type="submit" class="btn bg-danger text-white" value="Delete">
-                                </form>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        @foreach ($users as $user)
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $user->name }}</h5>
+                    <p class="card-text"><strong>Role:</strong> {{ $user->role }}</p>
+                    <p class="card-text"><strong>Email:</strong> {{ $user->email }}</p>
+                    <p class="card-text"><small class="text-muted"><strong>Joined:</strong> {{ $user->created_at->diffForHumans() }}</small></p>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <form action="{{ route('user.destroy', $user) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                    <div>
+                        <form action="{{ route('user.update', $user)}}" method="post" class="d-inline">
+                            @csrf
+                            @method('put')
+                            <div class="input-group">
+                                <select name="user-role" class="form-select form-select-sm">
+                                    <option value="user">User</option>
+                                    <option value="editor">Editor</option>
+                                </select>
+                                <button type="submit" class="btn btn-success btn-sm">Update</button>
                             </div>
-                            <div class="mt-2">
-                                <form action="{{ route('user.update', $user)}}" method="post" class="d-flex align-items-center">
-                                    @csrf
-                                    @method('put')
-                                    <div class="mr-2">
-                                        <select name="user-role" class="form-select">
-                                            <option value="user" @if($user->role === 'user') selected @endif>User</option>
-                                            <option value="editor" @if($user->role === 'editor') selected @endif>Editor</option>
-                                        </select>
-                                    </div>
-                                    <div class="mr-2">
-                                        <input type="submit" class="btn bg-success text-white mx-3" value="Edit">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        </form>
                     </div>
-                    @endforeach
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
 </div>
 

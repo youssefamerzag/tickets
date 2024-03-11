@@ -6,7 +6,7 @@
         <div class="card-header bg-primary text-white d-flex justify-content-between">
             <h4 class="mb-0 p-1">{{ $ticket->title }}</h4>
             @if($ticket->status == 'Open')
-                <h4 class="mb-0 p-1 rounded bg-success">{{ $ticket->status }}</h4>
+                <h4 class="mb-0 p-1 rounded" style="background-color: rgb(5, 185, 20)">{{ $ticket->status }}</h4>
             @else
                 <h4 class="mb-0 p-1 bg-danger rounded">{{ $ticket->status }}</h4>
             @endif

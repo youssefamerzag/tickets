@@ -39,7 +39,7 @@ Route::put('/ticket/edit/{ticket}', [TicketsController::class , 'update'])->name
 Route::delete('/ticket/edit/{ticket}', [UserController::class , 'destroy'])->name('tickets.destroy')->middleware('auth');
 
 //show ticket
-Route::get('/ticket/{ticket}', [TicketsController::class , 'show'])->name('ticket.show');
+Route::get('/ticket/{ticket}', [TicketsController::class , 'show'])->name('tickets.show');
 //admin 
 
 Route::middleware('admin')->group(function () {
