@@ -18,15 +18,6 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
-
-<script>
-    function theme() {
-        var element = document.body;
-        element.dataset.bsTheme = element.dataset.bsTheme == 'light' ? 'dark' : 'light';
-        console.log(element.dataset.bsTheme);
-    }
-</script>
-
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md  shadow-sm">
@@ -34,11 +25,6 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Tickets
                 </a>
-
-                <div class="form-check form-switch">
-                    <input type="checkbox" class="form-check-input mx-2 py-3 px-4" role="switch" checked onclick="theme()"/>
-                </div>
-
                 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

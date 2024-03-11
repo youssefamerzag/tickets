@@ -29,6 +29,15 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    <label for="ticket-title">file (optional):</label>
+                    <input type="file" class="form-control @error('ticket-file') is-invalid @enderror" id="ticket-file" name="ticket-file" value="{{ old('ticket-file') }}" placeholder="Enter file">
+                    @error('ticket-file')
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
                     <label for="ticket-type">Type:</label>
                     <select class="form-control @error('ticket-type') is-invalid @enderror" id="ticket-type" name="ticket-type">
                         <option value="Bug" {{ $ticket->type === 'Bug' ? 'selected' : '' }}>Bug</option>

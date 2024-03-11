@@ -16,6 +16,12 @@ class TicketsController extends Controller
         ]);
     }
 
+    public function show($id) {
+        return view('ticket.show', [
+            'ticket' => Tickets::find($id)
+        ]);
+    }
+
     public function create() {
         return view('ticket.create');
     }
@@ -24,19 +30,30 @@ class TicketsController extends Controller
         $request->validate([
             'ticket-title' => 'required',
             'ticket-description' => 'required',
-            'ticket-type' => 'required'
+            'ticket-type' => 'required',
+            'ticket-file' => '' 
         ]);
-
+    
         $user = Auth::user();
-
+    
         $ticket = new Tickets();
         $ticket->title = $request->input('ticket-title');
         $ticket->description = $request->input('ticket-description');
         $ticket->type = $request->input('ticket-type');
         $ticket->user_id = $user->id;
+    
+        if($request->hasFile('ticket-file')) {
+            $file = $request->file('ticket-file');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move(public_path('files'), $filename);
+            $ticket->file = $filename; 
+        }
+        
         $ticket -> save();
 
-        return to_route('users.show');
+        return to_route('home');
+
     }
 
     public function edit($id) {

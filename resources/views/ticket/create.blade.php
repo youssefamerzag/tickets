@@ -7,7 +7,7 @@
             <h5 class="mb-0">Create New Ticket</h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('tickets.store') }}" method="POST">
+            <form action="{{ route('tickets.store') }}" method="POST"  enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="ticket-title">Title:</label>
@@ -22,6 +22,15 @@
                     <label for="ticket-description">Description:</label>
                     <textarea class="form-control @error('ticket-description') is-invalid @enderror" id="ticket-description" name="ticket-description" rows="4" placeholder="Enter description">{{ old('ticket-description') }}</textarea>
                     @error('ticket-description')
+                        <span class="invalid-feedback" role="alert">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="ticket-file">File (optional):</label>
+                    <input type="file" class="form-control @error('ticket-file') is-invalid @enderror" id="ticket-file" name="ticket-file" value="{{ old('ticket-file') }}" placeholder="Enter file">
+                    @error('ticket-file')
                         <span class="invalid-feedback" role="alert">
                             {{ $message }}
                         </span>

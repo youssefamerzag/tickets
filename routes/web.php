@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\UserController;
+use App\Models\Tickets;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,8 @@ Route::put('/ticket/edit/{ticket}', [TicketsController::class , 'update'])->name
 //delete ticket
 Route::delete('/ticket/edit/{ticket}', [UserController::class , 'destroy'])->name('tickets.destroy')->middleware('auth');
 
+//show ticket
+Route::get('/ticket/{ticket}', [TicketsController::class , 'show'])->name('ticket.show');
 //admin 
 
 Route::middleware('admin')->group(function () {
