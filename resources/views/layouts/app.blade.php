@@ -62,6 +62,7 @@
                                     
                                     @if( Auth::user()->role === 'admin' )
                                     <a class="dropdown-item" href="{{ route('admin.profile') }}">Admin Profile</a>
+                                    <a class="dropdown-item" href="{{ route('users.index')}}">Users</a>
                                     @endif
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

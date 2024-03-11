@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tickets;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +39,7 @@ class AdminController extends Controller
         $ticket->status = $request->input('ticket-status');
         $ticket -> save();
 
-        return to_route('admin.profile');
+        return to_route('home');
     }
 
     public function destroy($id) {
@@ -46,4 +47,20 @@ class AdminController extends Controller
         $ticket -> delete();
         return to_route('home');
     }
+
+
+    //users
+
+    public function users_index() {
+        return view('admin.users', [
+            'users' => User::where('role' , null)->get()->sortByDesc('created_at')
+        ]);
+    }
+
+    public function destroy_user($id) {
+        $user = User::find($id);
+        $user -> delete();
+        return to_route('users.index');
+    }
+
 }

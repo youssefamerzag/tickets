@@ -44,6 +44,8 @@ Route::middleware('admin')->group(function () {
     Route::get('/admin/ticket/edit/{ticket}', [AdminController::class , 'edit'])->name('adminticket.edit');
     Route::put('/admin/ticket/edit/{ticket}', [AdminController::class , 'update'])->name('adminticket.update');
     Route::delete('/admin/ticket/destroy/{ticket}', [AdminController::class , 'destroy'])->name('adminticket.destroy');
+    Route::get('/admin/users', [AdminController::class , 'users_index'])->name('users.index');
+    Route::delete('/admin/user/{user}', [AdminController::class , 'destroy_user'])->name('user.destroy');
 });
 
 
