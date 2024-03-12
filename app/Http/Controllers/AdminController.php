@@ -73,4 +73,12 @@ class AdminController extends Controller
         return to_route('users.index');
     }
 
+    //user tickets
+
+    public function user_tickets($id) {
+        return view('admin.show', [
+            'user' => User::find($id),
+            'tickets' => Tickets::where('user_id' , $id)->get()->sortByDesc('created_at')
+        ]);
+    }
 }

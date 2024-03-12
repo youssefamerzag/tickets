@@ -16,6 +16,7 @@
                     <p class="card-text"><small class="text-muted"><strong>Joined:</strong> {{ $user->created_at->diffForHumans() }}</small></p>
                 </div>
                 <div class="card-footer d-flex justify-content-between align-items-center">
+                    <a class="btn btn-primary btn-sm" href="{{ route('user.tickets' , $user )}}">Tickets</a>
                     <form action="{{ route('user.destroy', $user) }}" method="post">
                         @csrf
                         @method('delete')
