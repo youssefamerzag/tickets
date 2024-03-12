@@ -23,7 +23,8 @@ use PHPUnit\Framework\Attributes\Ticket;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\TicketsController::class, 'index'])->name('home');
+
+Route::get('/', [App\Http\Controllers\TicketsController::class, 'index'])->name('home')->middleware('auth');
 
 Route::get('/profile' , [UserController::class , 'show'])->name('users.show')->middleware('auth');
 
@@ -39,10 +40,10 @@ Route::put('/ticket/edit/{ticket}', [TicketsController::class , 'update'])->name
 Route::delete('/ticket/edit/{ticket}', [UserController::class , 'destroy'])->name('tickets.destroy')->middleware('auth');
 
 //show ticket
-Route::get('/ticket/{ticket}', [TicketsController::class , 'show'])->name('tickets.show');
+Route::get('/ticket/{ticket}', [TicketsController::class , 'show'])->name('tickets.show')->middleware('auth');
 //admin 
 
-Route::middleware('admin')->group(function () {
+Route::middleware('admin', 'auth')->group(function () {
     Route::get('/admin' , [AdminController::class , 'index'])->name('admin.profile');
     Route::get('/admin/ticket/edit/{ticket}', [AdminController::class , 'edit'])->name('adminticket.edit');
     Route::put('/admin/ticket/edit/{ticket}', [AdminController::class , 'update'])->name('adminticket.update');

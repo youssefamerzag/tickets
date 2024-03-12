@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="container">
+    @if(Auth::user()->role == 'admin')
+        <a class="btn btn-primary px-4 mb-3" href="{{ route('admin.profile')}}">Back</a>
+    @else
+        <a class="btn btn-primary px-4 mb-3" href="{{ route('users.show')}}">Back</a>
+    @endif
     <div class="card">
         <div class="card-header">
             <h5 class="mb-0">Edit Ticket</h5>

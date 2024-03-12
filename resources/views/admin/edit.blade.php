@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+            <a class="btn btn-primary px-4 mb-3" href="{{ route('home')}}">Back</a>
     <div class="card">
         <div class="card-header">
             <h5 class="mb-0">Edit Ticket</h5>

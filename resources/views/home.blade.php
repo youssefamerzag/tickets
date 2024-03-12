@@ -2,100 +2,86 @@
 
 @section('content')
 <div class="container">
-    <div class="card mt-4">
-        <div class="card-header bg-primary">
-            <h5 class="card-title text-white mb-0 p-1">Tickets</h5>
-        </div>
-        <ul class="list-group list-group-flush">
-            @forelse($Opentickets as $Openticket)
-                <li class="list-group-item">
-                    <div class="d-flex justify-content-between align-items-center text-center">
-                        @if($Openticket->user != null)
-                            @if($Openticket->status == 'Open')
-                                <span class="bg-primary p-2 text-white rounded">{{ $Openticket->status }}</span>
-                            @endif
-                            @if($Openticket->status != 'Open')
-                                <span class="bg-danger p-2 text-white rounded">{{ $Openticket->status }}</span>
-                            @endif
-                            <div>
-                                <h5 class="mb-1 m-2">{{ $Openticket->title }}</h5>
-                                <p class="mb-1">Type: {{ $Openticket->type }}</p>
-                                <p class="mb-1">by: {{ $Openticket->user->name }}</p>
+    <div class=" mt-4">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <h5 class="card-title text-white mb-0 p-1">Open Tickets</h5>
+            </div>
+            <div class="card-body">
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    @forelse($Opentickets as $Openticket)
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-title">{{ $Openticket->title }}</h3>
+                                <p class="card-text mb-1">Type: {{ $Openticket->type }}</p>
+                                <p class="card-text">By: {{ $Openticket->user->name }}</p>
+                                <div class="mt-3 d-flex justify-content-around">
+                                    <a href="{{ route('tickets.show', $Openticket->id) }}" class="btn btn-outline-primary btn-sm px-3">Show</a>
+                                    @if(Auth::check() && Auth::user()->role !== 'user')
+                                    <a href="{{ route('adminticket.edit', $Openticket->id) }}" class="btn btn-outline-success btn-sm px-4">Edit</a>
+                                    <form action="{{ route('adminticket.destroy' , $Openticket)}}" method="post" onsubmit="return confirm('Are you sure you want to delete this ticket?')">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-outline-danger btn-sm px-3" onclick="return confirm('Are you sure you want to delete this ticket?')">Delete</button>
+                                    </form>
+                                    @endif
+                                </div>
                             </div>
-                            @if(Auth::guest() || Auth::user()->role == 'user' )
-                                <a></a>
-                            @endif
-                            @if(Auth::check())
-                                @if(Auth::user()->role !== 'user')
-                                    <div>
-                                        <a href="{{ route('adminticket.edit', $Openticket->id) }}" class="btn btn-sm btn-outline-success px-3 m-1">Edit</a>
-                                        <a href="{{ route('tickets.show', $Openticket->id) }}" class="btn btn-sm btn-outline-primary px-3 m-1">Show</a>
-                                        <form  action="{{ route('adminticket.destroy' , $Openticket)}}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <input class="btn btn-sm btn-outline-danger px-2 m-1" type="submit" value="Delete">
-                                        </form>
-                                    </div>
-                                @endif
-                            @endif
-                            @else 
-                            <li class="list-group-item">No tickets found.</li>
-                        @endif
+                        </div>
                     </div>
-                </li>
-            @empty
-                <li class="list-group-item">No tickets found.</li>
-            @endforelse
-        </ul>
+                    @empty
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text">No open tickets found.</p>
+                            </div>
+                        </div>
+                    </div>
+                    @endforelse
+                </div>
+            </div>
+        </div>
     </div>
-
-
 
     <div class="card mt-4">
         <div class="card-header bg-danger">
             <h5 class="card-title text-white mb-0 p-1">Closed Tickets</h5>
         </div>
-        <ul class="list-group list-group-flush">
-            @forelse($Closedtickets as $Closedticket)
-                    <li class="list-group-item">
-                        <div class="d-flex justify-content-between align-items-center text-center">
-                            @if($Closedticket->user != null)
-                                @if($Closedticket->status == 'Open')
-                                    <span class="bg-primary p-2 text-white rounded">{{ $Closedticket->status }}</span>
+        <div class="card-body">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @forelse($Closedtickets as $Closedticket)
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ $Closedticket->title }}</h3>
+                            <p class="card-text mb-1">Type: {{ $Closedticket->type }}</p>
+                            <p class="card-text">By: {{ $Closedticket->user->name }}</p>
+                            <div class="mt-3 d-flex justify-content-around">
+                                <a href="{{ route('tickets.show', $Closedticket->id) }}" class="btn btn-outline-primary btn-sm px-3">Show</a>
+                                @if(Auth::check() && Auth::user()->role !== 'user')
+                                <a href="{{ route('adminticket.edit', $Closedticket->id) }}" class="btn btn-outline-success btn-sm px-4">Edit</a>
+                                <form action="{{ route('adminticket.destroy' , $Closedticket)}}" method="post" onsubmit="return confirm('Are you sure you want to delete this ticket?')">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-outline-danger btn-sm px-3" onclick="return confirm('Are you sure you want to delete this ticket?')">Delete</button>
+                                </form>
                                 @endif
-                                @if($Closedticket->status != 'Open')
-                                    <span class="bg-danger p-2 text-white rounded">{{ $Closedticket->status }}</span>
-                                @endif
-                                <div>
-                                    <h5 class="mb-1 m-2">{{ $Closedticket->title }}</h5>
-                                    <p class="mb-1">Type: {{ $Closedticket->type }}</p>
-                                    <p class="mb-1">by: {{ $Closedticket->user->name }}</p>
-                                </div>
-                                @if(Auth::guest() || Auth::user()->role != 'admin')
-                                    <a></a>
-                                @endif
-                                @if(Auth::check())
-                                    @if(Auth::user()->role !== 'user')
-                                        <div>
-                                            <a href="{{ route('adminticket.edit', $Closedticket->id) }}" class="btn btn-sm btn-outline-success px-3 m-1">Edit</a>
-                                            <a href="{{ route('tickets.show', $Closedticket->id) }}" class="btn btn-sm btn-outline-primary px-3 m-1">show</a>
-                                            <form  action="{{ route('adminticket.destroy' , $Closedticket)}}" method="post">
-                                                @csrf
-                                                @method('delete')
-                                                <input class="btn btn-sm btn-outline-danger px-2 m-1" type="submit" value="Delete">
-                                            </form>
-                                        </div>
-                                    @endif
-                                @endif
-                            @else 
-                                <li class="list-group-item">No tickets found.</li>
-                            @endif
+                            </div>
                         </div>
-                    </li>
+                    </div>
+                </div>
                 @empty
-                    <li class="list-group-item">No tickets found.</li>
-            @endforelse
-        </ul>
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-text">No closed tickets found.</p>
+                        </div>
+                    </div>
+                </div>
+                @endforelse
+            </div>
+        </div>
     </div>
 </div>
 @endsection

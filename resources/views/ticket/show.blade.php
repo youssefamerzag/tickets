@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container">
+    @if(Auth::user()->role == 'admin')
+        <a class="btn btn-primary px-4 mb-3" href="{{ route('home')}}">Back</a>
+    @endif
     <div class="card bg-light">
         <div class="card-header bg-primary text-white d-flex justify-content-between">
             <h4 class="mb-0 p-1">{{ $ticket->title }}</h4>

@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <h1 class="mt-5 mb-4">Tickets</h1>
-
+    <a class="btn btn-primary px-4" href="{{ route('users.index')}}">Back</a>
+    <h1 class="mt-4 mb-4">Tickets</h1>
     <div class="row row-cols-1 row-cols-md-2 g-4">
         @foreach($tickets as $ticket)
         <div class="col">

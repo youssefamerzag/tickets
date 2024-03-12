@@ -3,14 +3,14 @@
 @section('content')
 
 <div class="container">
+    <a class="btn btn-primary px-4" href="{{ route('admin.profile')}}">Back</a>
     <h1 class="mt-2 mb-4 text-center">Users List</h1>
-
     <div class="row row-cols-1 row-cols-md-2 g-4">
         @foreach ($users as $user)
         <div class="col">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $user->name }}</h5>
+                    <h3>{{ $user->name }}</h3>
                     <p class="card-text"><strong>Role:</strong> {{ $user->role }}</p>
                     <p class="card-text"><strong>Email:</strong> {{ $user->email }}</p>
                     <p class="card-text"><small class="text-muted"><strong>Joined:</strong> {{ $user->created_at->diffForHumans() }}</small></p>
