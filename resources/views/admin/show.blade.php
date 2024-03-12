@@ -20,6 +20,14 @@
                     <p class="card-text"><strong>Type:</strong> {{ $ticket->type }}</p>
                     <p class="card-text"><strong>Submitted by:</strong> {{ $ticket->user->name }}</p>
                     <p class="card-text"><strong>Created at:</strong> {{ $ticket->created_at }}</p>
+                    <div class="mt-3 d-flex justify-content-around">
+                        <a class="btn btn-outline-success btn-sm px-4" href="{{ route('tickets.edit' , $ticket)}}">Edit</a>
+                        <form action="{{ route('tickets.destroy' , $ticket)}}" method="post">
+                            @csrf
+                            @method('delete')
+                            <input type="submit" class="btn btn-outline-danger btn-sm px-3" value="Delete">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

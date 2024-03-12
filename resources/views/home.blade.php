@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class=" mt-4">
-        <div class="card">
+        <div class="card  shadow-sm">
             <div class="card-header bg-primary">
                 <h5 class="card-title text-white mb-0 p-1">Open Tickets</h5>
             </div>
@@ -11,7 +11,7 @@
                 <div class="row row-cols-1 row-cols-md-3 g-4">
                     @forelse($Opentickets as $Openticket)
                     <div class="col">
-                        <div class="card">
+                        <div class="card shadow-sm">
                             <div class="card-body">
                                 <h3 class="card-title">{{ $Openticket->title }}</h3>
                                 <p class="card-text mb-1">Type: {{ $Openticket->type }}</p>
@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <div class="card mt-4">
+    <div class="card mt-4  shadow-sm">
         <div class="card-header bg-danger">
             <h5 class="card-title text-white mb-0 p-1">Closed Tickets</h5>
         </div>
@@ -52,7 +52,7 @@
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 @forelse($Closedtickets as $Closedticket)
                 <div class="col">
-                    <div class="card">
+                    <div class="card  shadow-sm">
                         <div class="card-body">
                             <h3 class="card-title">{{ $Closedticket->title }}</h3>
                             <p class="card-text mb-1">Type: {{ $Closedticket->type }}</p>

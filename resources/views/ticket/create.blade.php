@@ -41,8 +41,7 @@
                     <select class="form-control @error('ticket-type') is-invalid @enderror" id="ticket-type" name="ticket-type">
                         <option value="">Select type</option>
                         <option value="Bug" {{ old('ticket-type') == 'Bug' ? 'selected' : '' }}>Bug</option>
-                        <option value="Tach" {{ old('ticket-type') == 'Tach' ? 'selected' : '' }}>Tach</option>
-                        <option value="Epic" {{ old('ticket-type') == 'Epic' ? 'selected' : '' }}>Epic</option>
+                        <option value="Tach" {{ old('ticket-type') == 'Tach' ? 'selected' : '' }}>Tache</option>
                     </select>
                     @error('ticket-type')
                         <span class="invalid-feedback" role="alert">

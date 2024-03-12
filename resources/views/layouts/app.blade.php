@@ -18,6 +18,8 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
+@include('sweetalert::alert')
+
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md  shadow-sm ">
@@ -87,6 +89,15 @@
         <main class="py-4">
             @yield('content')
         </main>
+        
     </div>
+
+
+    <!--<footer class="footer py-3  position-absolute top-100 start-50 translate-middle">
+        <div class="container">
+            <span class="text-muted">Made with ❤️ by <a href="https://www.linkedin.com/in/youssefamerzag/" target="_blank" rel="noopener noreferrer">Youssef Amerzag</a></span>
+        </div>
+    </footer>-->
+
 </body>
 </html>

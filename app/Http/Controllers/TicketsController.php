@@ -6,6 +6,7 @@ use App\Models\Tickets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PHPUnit\Framework\Attributes\Ticket;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class TicketsController extends Controller
 {
@@ -49,10 +50,11 @@ class TicketsController extends Controller
             $file->move(public_path('files'), $filename);
             $ticket->file = $filename; 
         }
-        
         $ticket -> save();
 
+        Alert::success('Success Title', 'Success Message')->persistent(true);
         return to_route('home');
+        
 
     }
 
