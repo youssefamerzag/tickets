@@ -31,10 +31,10 @@
                     <div class="d-flex justify-content-end">
                         <a href="{{ route('tickets.show', $ticket->id) }}" class="btn btn-primary btn-sm">Show</a>
                         <a href="{{ route('tickets.edit', $ticket->id) }}" class="btn btn-success btn-sm mx-1">Edit</a>
-                        <form action="{{ route('tickets.destroy', $ticket->id)}}" method="post" onsubmit="return confirm('Are you sure you want to delete this ticket?')">
+                        <form id="deleteForm" action="{{ route('tickets.destroy', $ticket->id)}}" method="post" >
                             @csrf
                             @method('delete')
-                            <button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure you want to delete this ticket?')">Delete</button>
+                            <button onclick="confirmation()" class="btn btn-danger btn-sm" type="button" >Delete</button>
                         </form>
                     </div>
                 </div>
@@ -50,5 +50,29 @@
         </div>
         @endforelse
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmation() {
+            Swal.fire({
+                title: "Are you sure to delete this user?",
+                text: "You will not be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteForm').submit();
+                    Swal.fire({
+                    title: "Good job!",
+                    text: "You clicked the button!",
+                    icon: "success"
+                });
+                }
+            });
+        }
+    </script>
 </div>
 @endsection

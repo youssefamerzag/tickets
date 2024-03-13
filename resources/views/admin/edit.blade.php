@@ -8,7 +8,7 @@
             <h5 class="mb-0">Edit Ticket</h5>
         </div>
         <div class="card-body">
-            <form action="{{ route('adminticket.update', $ticket) }}" method="post">
+            <form id="updateForm" action="{{ route('adminticket.update', $ticket) }}" method="post">
                 @csrf
                 @method('put')
                 <div class="form-group">
@@ -53,9 +53,33 @@
                         </span>
                     @enderror
                 </div>
-                <button type="submit" class="btn btn-success mt-3">Update Ticket</button>
+                <button onclick="confirmation()" type="button" class="btn btn-success mt-3">Update Ticket</button>
             </form>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmation() {
+            Swal.fire({
+                title: "Are you sure to update this ticket?",
+                text: "You will not be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, update it!",
+                cancelButtonText: "Cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                    title: "Done!",
+                    text: "The ticket has been updated!",
+                    icon: "success"
+                    });
+                    document.getElementById('updateForm').submit();
+                }
+            });
+        }
+    </script>
 </div>
 @endsection

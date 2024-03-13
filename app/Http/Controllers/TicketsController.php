@@ -68,7 +68,8 @@ class TicketsController extends Controller
         $request->validate([
             'ticket-title' => 'required',
             'ticket-description' => 'required',
-            'ticket-type' => 'required'
+            'ticket-type' => 'required',
+            'ticket-status' => ''
         ]);
 
         $ticket = Tickets::find($id);
@@ -76,6 +77,7 @@ class TicketsController extends Controller
         $ticket->title = $request->input('ticket-title');
         $ticket->description = $request->input('ticket-description');
         $ticket->type = $request->input('ticket-type');
+        $ticket->status = $request->input('ticket-status');
         $ticket -> save();
 
         return to_route('users.show');

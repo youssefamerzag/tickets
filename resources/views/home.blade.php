@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <div class=" mt-4">
         <div class="card  shadow-sm">
             <div class="card-header bg-primary">
@@ -20,10 +21,10 @@
                                     <a href="{{ route('tickets.show', $Openticket->id) }}" class="btn btn-outline-primary btn-sm px-3">Show</a>
                                     @if(Auth::check() && Auth::user()->role !== 'user')
                                     <a href="{{ route('adminticket.edit', $Openticket->id) }}" class="btn btn-outline-success btn-sm px-4">Edit</a>
-                                    <form action="{{ route('adminticket.destroy' , $Openticket)}}" method="post" onsubmit="return confirm('Are you sure you want to delete this ticket?')">
+                                    <form id="deleteForm" action="{{ route('adminticket.destroy' , $Openticket)}}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-outline-danger btn-sm px-3" onclick="return confirm('Are you sure you want to delete this ticket?')">Delete</button>
+                                        <button type="button" onclick="confirmation()" class="btn btn-outline-danger btn-sm px-3">Delete</button>
                                     </form>
                                     @endif
                                 </div>
@@ -60,12 +61,12 @@
                             <div class="mt-3 d-flex justify-content-around">
                                 <a href="{{ route('tickets.show', $Closedticket->id) }}" class="btn btn-outline-primary btn-sm px-3">Show</a>
                                 @if(Auth::check() && Auth::user()->role !== 'user')
-                                <a href="{{ route('adminticket.edit', $Closedticket->id) }}" class="btn btn-outline-success btn-sm px-4">Edit</a>
-                                <form action="{{ route('adminticket.destroy' , $Closedticket)}}" method="post" onsubmit="return confirm('Are you sure you want to delete this ticket?')">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-outline-danger btn-sm px-3" onclick="return confirm('Are you sure you want to delete this ticket?')">Delete</button>
-                                </form>
+                                    <a href="{{ route('adminticket.edit', $Closedticket->id) }}" class="btn btn-outline-success btn-sm px-4">Edit</a>
+                                    <form id="deleteForm" action="{{ route('adminticket.destroy' , $Closedticket)}}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button onclick="confirmation()" class="btn btn-outline-danger btn-sm px-3">Delete</button>
+                                    </form>
                                 @endif
                             </div>
                         </div>
@@ -83,5 +84,24 @@
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmation() {
+            Swal.fire({
+                title: "Are you sure to delete this user?",
+                text: "You will not be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete it!",
+                cancelButtonText: "Cancel",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('deleteForm').submit();
+                }
+            });
+        }
+    </script>
 </div>
 @endsection
